@@ -447,3 +447,112 @@ body {
   font-weight: 600;
   color: #333;
 }
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+  .app {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .app-main {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .input-section {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .output-section {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+  }
+
+  .binary-layer-view,
+  .ascii-simulator {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+
+  .merged-view {
+    min-height: 300px;
+  }
+
+  .individual-layers {
+    min-height: 300px;
+  }
+
+  .layer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 400px;
+  }
+
+  .merged-canvas {
+    max-width: 100%;
+    max-height: 300px;
+  }
+
+  .layer-toggles {
+    flex-wrap: wrap;
+  }
+
+  .control-panel {
+    padding: 15px;
+  }
+
+  .slider-group {
+    margin-bottom: 15px;
+  }
+
+  /* Adjust modal for mobile */
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+    margin: 10px;
+  }
+
+  .opacity-control {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .opacity-control .slider {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+  .layer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .control-panel h3,
+  .binary-layer-view h3,
+  .ascii-simulator h3 {
+    font-size: 0.9rem;
+  }
+
+  .layer-toggles {
+    gap: 4px;
+  }
+
+  .layer-toggle {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+}
