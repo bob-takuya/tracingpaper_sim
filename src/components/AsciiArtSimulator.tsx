@@ -177,7 +177,7 @@ export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayer
                   </button>
                 </div>
                 <canvas
-                  ref={(el) => (layerCanvasRefs.current[index] = el)}
+                  ref={(el) => { layerCanvasRefs.current[index] = el; }}
                   className="layer-canvas small"
                   style={{ maxWidth: '100%', height: 'auto' }}
                 />

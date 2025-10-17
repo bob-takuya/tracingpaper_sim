@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Download } from 'lucide-react';
-import { generateBinaryLayerCanvas, downloadCanvas } from '../utils/downloadHelper';
+import { generateBinaryLayerCanvas, downloadCanvas as downloadCanvasUtil } from '../utils/downloadHelper';
 
 interface BinaryLayerViewProps {
   layers: boolean[][][];
@@ -45,8 +45,8 @@ export const BinaryLayerView: React.FC<BinaryLayerViewProps> = ({ layers, aspect
     // Generate a larger canvas for download
     const downloadWidth = 500;
     const downloadHeight = downloadWidth / aspectRatio;
-    const downloadCanvas = generateBinaryLayerCanvas(layer, downloadWidth, downloadHeight);
-    await downloadCanvas(downloadCanvas, `binary_layer_${index + 1}.png`);
+    const canvas = generateBinaryLayerCanvas(layer, downloadWidth, downloadHeight);
+    await downloadCanvasUtil(canvas, `binary_layer_${index + 1}.png`);
   };
 
   if (layers.length === 0) return null;
@@ -68,7 +68,7 @@ export const BinaryLayerView: React.FC<BinaryLayerViewProps> = ({ layers, aspect
               </button>
             </div>
             <canvas
-              ref={(el) => (canvasRefs.current[index] = el)}
+              ref={(el) => { canvasRefs.current[index] = el; }}
               className="layer-canvas"
               style={{ maxWidth: '100%', height: 'auto' }}
             />
