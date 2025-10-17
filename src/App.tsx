@@ -90,6 +90,7 @@ function App() {
             <AsciiArtSimulator
               asciiLayers={asciiLayers}
               aspectRatio={imageAspectRatio}
+              onDownloadAll={handleDownloadAllBinary}
             />
           </section>
         )}

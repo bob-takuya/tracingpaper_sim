@@ -6,9 +6,10 @@ import { generateAsciiCanvas, downloadCanvas } from '../utils/downloadHelper';
 interface AsciiArtSimulatorProps {
   asciiLayers: AsciiLayer[];
   aspectRatio: number;
+  onDownloadAll: () => void;
 }
 
-export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayers, aspectRatio }) => {
+export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayers, aspectRatio, onDownloadAll }) => {
   const [activeLayers, setActiveLayers] = useState<Set<number>>(new Set());
   const [opacityMultiplier, setOpacityMultiplier] = useState(0.5);
   const mergedCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -67,7 +68,7 @@ export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayer
       if (!canvas) return;
 
       // Calculate canvas dimensions for individual layers
-      const maxSize = 200;
+      const maxSize = 150;
       let canvasWidth, canvasHeight;
 
       if (aspectRatio > 1) {
@@ -141,6 +142,11 @@ export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayer
             </button>
           ))}
         </div>
+
+        <button onClick={onDownloadAll} className="download-all-btn">
+          <Download size={20} />
+          全レイヤーをZIPでダウンロード
+        </button>
       </div>
 
       <div className="individual-layers">
@@ -161,7 +167,8 @@ export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayer
             />
           </div>
         </div>
-        <div className="layer-list">
+
+        <div className="layer-grid">
           {asciiLayers.map((layer, index) => {
             const adjustedOpacity = Math.pow(opacityMultiplier, layer.layer);
             return (
@@ -178,7 +185,7 @@ export const AsciiArtSimulator: React.FC<AsciiArtSimulatorProps> = ({ asciiLayer
                 </div>
                 <canvas
                   ref={(el) => { layerCanvasRefs.current[index] = el; }}
-                  className="layer-canvas small"
+                  className="layer-canvas"
                   style={{ maxWidth: '100%', height: 'auto' }}
                 />
               </div>
